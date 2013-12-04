@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test'em</title>
+        <link rel="stylesheet" href="/testem/mocha.css">
+        <script src="/testem/mocha.js"></script>
+        <script src="/testem/chai.js"></script>
+        <script src="/testem.js"></script>
+        <script>mocha.setup('bdd')</script>
+        <script src="/vendor/expect/expect.js"></script>
+        <script src="/vendor/requirejs/require.js"></script>
+    </head>
+    <body>
+        <h1>Hodor</h1>
+        <div id="mocha"></div>
+        <script>
+            describe("A Test", function () {
+                var one = 1;
+                console.log('one: ' + one);
+                expect(one).to.be(11);
+            });
+            mocha.run();
+        </script>
+    </body>
+</html>
+
