@@ -1,6 +1,7 @@
 define (require, exports, module) ->
   BaseController = require('base/Controller')
   TitleView = require('app/Title')
+  HeaderController = require('app/header/Header.Controller')
 
   class MainController extends BaseController
     initialize: (options) ->
@@ -9,6 +10,11 @@ define (require, exports, module) ->
       @layoutView = options.layoutView
       @region.show @layoutView
       @showTitleView()
+      @showHeader()
+
+    showHeader: ->
+      new HeaderController
+        region: @layoutView.headerRegion
 
     getTitleView: ->
       unless @titleView
