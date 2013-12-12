@@ -5,11 +5,11 @@ define (require, exports, module) ->
   class MenuItems extends Backbone.Collection
     model: MenuItem
     items:
-      HOME:             new MenuItem(name: 'Home', selected: true)
-      CALCULATE_BILL:   new MenuItem(name: 'Calculate Bill')
+      HOME:       new MenuItem(name: 'Home', selected: true)
+      INVOICE:   new MenuItem(name: 'Invoice')
     initialize: ->
       @add @items.HOME
-      @add @items.CALCULATE_BILL
+      @add @items.INVOICE
 
     getItemKeyFor: (item) ->
       for prop of @items

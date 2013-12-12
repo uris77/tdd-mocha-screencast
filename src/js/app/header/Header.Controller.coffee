@@ -1,7 +1,7 @@
 define (require, exports, module) ->
   Controller = require('base/Controller')
   HeaderLayout = require('app/header/HeaderLayout')
-  MenuItemsView = require('app/header/MenuItemsView')
+  MenuItemsViews = require('app/header/MenuItemsView')
   MenuItems = require('app/header/MenuItems')
   RightMenuView = require('app/header/Header.RightMenu')
 
@@ -12,10 +12,22 @@ define (require, exports, module) ->
       @repository = options.repository
       @repository.onFetched @showRightHeader
       @layout = new HeaderLayout()
-      menuItemsView = new MenuItemsView
-        collection: new MenuItems()
       @region.show @layout
-      @layout.leftHeader.show menuItemsView
+      @showMenuItems()
+      @layout.leftHeader.show @menuItemsView
+
+    showMenuItems: ->
+      @menuItems = new MenuItems()
+      @menuItemsView = new MenuItemsViews.MenuItemsView
+        collection: @menuItems
+      @menuItemsView.on 'itemview:select', @menuItemHandler
+
+    menuItemHandler: (childview, model) =>
+      _.each(@menuItems.models, (it) ->
+        if it.get('name') isnt model.get('name')
+          it.set('selected', false)
+      )
+      @menuItemsView.render()
 
     showRightHeader: =>
       rightMenuView = new RightMenuView

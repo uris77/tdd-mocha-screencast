@@ -2,7 +2,9 @@ define (require, exports, module) ->
   Marionette = require('marionette')
   require('templates/header/menuItems')
 
-  class MenuItemView extends Marionette.ItemView
+  Views = {}
+
+  class Views.MenuItemView extends Marionette.ItemView
     template: (obj) -> JST['menuItems.hbs'](obj)
     tagName: 'a'
     className: ->
@@ -12,18 +14,18 @@ define (require, exports, module) ->
         'item'
 
     events:
-      'click ': 'selectMenuItem'
+      'click ': 'selectItem'
 
-    selectMenuItem: (domEvent) ->
+    selectItem: (domEvent) ->
       domEvent.preventDefault()
-      unless @model.get 'selected'
-        @model.set 'selected', true
+      unless @model.get('selected')
+        @model.set('selected', true)
         @trigger 'select', @model
 
 
-  class MenuItemsView extends Marionette.CollectionView
+  class Views.MenuItemsView extends Marionette.CollectionView
     className: 'section ui'
-    itemView: MenuItemView
+    itemView: Views.MenuItemView
 
-  module.exports = MenuItemsView
+  module.exports = Views
 

@@ -4,15 +4,21 @@ define (require, exports, module) ->
   sinon = require('sinon')
   require('call')
   require('spy')
+  require('stub')
 
   describe 'The Application Main Controller', ->
+    fakeRegion = new Marionette.Region
+      el: '#content'
+
     beforeEach ->
-      fakeRegion = new Marionette.Region
-        el: '#fake-region'
-      @spy = sinon.spy(MainController.prototype, 'showHeader')
+      @stub = sinon.stub(MainController.prototype, 'showHeader')
       @mainController = new MainController
         region: fakeRegion
         layoutView: new Layout()
 
+    afterEach ->
+      @stub.restore()
+
     it 'renders the header', ->
-      expect( @spy.calledOnce ).to.be true
+      expect( @stub.calledOnce ).to.be true
+

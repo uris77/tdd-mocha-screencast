@@ -83,7 +83,9 @@ require.config({
 var specs = [
     'specs/header/Header.Spec',
     'specs/Main.Controller.Spec',
-    'specs/repositories/User.Repository.Spec'
+    'specs/repositories/User.Repository.Spec',
+    'specs/invoice/Invoice.Form.Controller.Spec',
+    'specs/header/Header.MenuItems.Spec'
     ];
 require(specs, function () {
     if (typeof mochaPhantomJS !== 'undefined') {
