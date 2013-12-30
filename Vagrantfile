@@ -19,7 +19,9 @@ Vagrant.configure("2") do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :private_network, ip: "192.168.140.100"
   config.vm.network :forwarded_port, guest: 27017, host: 27017
-  config.vm.hostname = "mongo.potholes.internal"
+  config.vm.network :forwarded_port, guest: 5984, host: 5984
+  config.vm.network :forwarded_port, guest: 6379, host: 6379
+  config.vm.hostname = "tdd.screencast.internal"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
