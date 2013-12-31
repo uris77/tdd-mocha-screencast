@@ -20,6 +20,7 @@ define (require, exports, module) ->
       @headerController = new HeaderController
         region: @layoutView.headerRegion
         repository: @userRepository
+      @headerController.vent.on 'menu:click', @startComponent
 
     getTitleView: ->
       unless @titleView
@@ -29,6 +30,22 @@ define (require, exports, module) ->
 
     showTitleView: ->
       @layoutView.centerRegion.show @getTitleView()
+
+    startComponent: (componentName) =>
+      if @currentComponent then @currentComponent.instance.close()
+      switch componentName
+        when 'HOME'
+          @currentComponent =
+            name: componentName
+            instance: @getTitleView()
+          @currentVIew = @getTitleView()
+          @showTitleView()
+        when 'INVOICE'
+          @currentComponent =
+            name: componentName
+            instance: new InvoiceFormController
+              region: @layoutView.centerRegion
+          @currentView = @currentComponent.instance.layout
 
   module.exports = MainController
 

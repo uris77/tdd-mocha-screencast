@@ -28,6 +28,7 @@ define (require, exports, module) ->
           it.set('selected', false)
       )
       @menuItemsView.render()
+      @vent.trigger 'menu:click', model.get('name').toUpperCase()
 
     showRightHeader: =>
       rightMenuView = new RightMenuView
